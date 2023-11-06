@@ -1,33 +1,38 @@
-import styles from '../styles/styles.module.css'
-import { useProduct } from '../hooks/use-product';
-import { createContext } from 'react';
-import { IProduct, IProductContextProps } from '../interfaces/interfaces';
-import { ReactElement } from "react"
+import styles from "../styles/styles.module.css";
+import { useProduct } from "../hooks/use-product";
+import { createContext } from "react";
+import {
+  IProduct,
+  IProductContextProps,
+  ProductCardProps,
+  onChangeArgs,
+} from "../interfaces/interfaces";
 
-export const ProductContext = createContext({
-} as IProductContextProps)
-const { Provider } = ProductContext // esta es ,mi fuente de datos
-
-
+export const ProductContext = createContext({} as IProductContextProps);
+const { Provider } = ProductContext; // esta es ,mi fuente de datos
 
 export interface Props {
-  product: IProduct
-  children?: ReactElement | ReactElement[]
-  className?: string
-  style?: React.CSSProperties
+  product: IProduct;
+  children?: React.ReactElement | React.ReactElement[];
+  className?: string;
+  style?: React.CSSProperties;
+  onChange?: (args: onChangeArgs) => void;
+  value?: number;
 }
 
-
-export const ProductCard = ({ children, product, className, style }: Props) => {
-
-  const { counter, increaseBy } = useProduct()
+export const ProductCard = ({
+  children,
+  product,
+  className,
+  style,
+  onChange,
+  value,
+}: Props) => {
+  const { counter, increaseBy } = useProduct({ onChange, product, value });
 
   return (
     <Provider value={{ product, counter, increaseBy }}>
-      <div
-        className={styles.productCard + ' ' + className}
-        style={style}
-      >
+      <div className={`${styles.productCard} ${className}`} style={style}>
         {/* antes venia asi <img className={styles.productImg} src='./coffee-mug.png' alt='Cofee mug' />
     className={styles.ProductCard} */}
         {/* <img className={styles.productImg} src={img ? img : noProduct} alt='Not available' /> */}
@@ -40,6 +45,6 @@ export const ProductCard = ({ children, product, className, style }: Props) => {
       </div>
     </Provider>
   );
-}
+};
 
 export default ProductCard;

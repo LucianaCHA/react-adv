@@ -1,23 +1,42 @@
-import { Props as IProductCardProps } from "../components/product-card"
-import { Props as ITitleProps } from "../components/product-title"
-import { Props as IImageProps } from "../components/product-image"
-import { Props as IButtonsProps } from "../components/product-buttons"
+import { ReactElement } from "react"
+import { Props as ProductButtonsProps } from '../components/product-buttons';
+import { Props as ProductImageProps } from '../components/product-image';
+import { Props as ProductTitleProps } from '../components/product-title';
+
+export interface ProductCardProps {
+  children?: ReactElement | ReactElement[]
+  product: IProduct
+  className?: string;
+  style?: React.CSSProperties;
+  onChange?: (args: onChangeArgs) => void;
+  value?: number;
+}
 
 export interface IProduct {
-  id: string
+  id :string
   title: string
   img?: string
 }
 
-export interface IProductContextProps {
+export interface IProductContextProps  {
   product: IProduct
   counter: number
   increaseBy: (value: number) => void
 }
 
 export interface ProductCardHOCProps {
-  ({ children, product }: IProductCardProps): JSX.Element
-  Title: (Props: ITitleProps) => JSX.Element;
-  Image: (Props: IImageProps) => JSX.Element;
-  Buttons: ({ className }: IButtonsProps) => JSX.Element;
+  ({ children, product }: ProductCardProps ):JSX.Element,
+    Buttons: ( Props: ProductButtonsProps ) => JSX.Element,
+    Image:   ( Props: ProductImageProps ) => JSX.Element,
+    Title:   ( Props: ProductTitleProps ) => JSX.Element,
+}
+
+export interface onChangeArgs {
+  product: IProduct;
+  count: number;
+}
+
+
+export interface IProductInCart extends IProduct {
+  count: number
 }
