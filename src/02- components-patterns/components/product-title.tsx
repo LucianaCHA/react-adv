@@ -4,6 +4,7 @@ import { ProductContext } from "./product-card";
 import styles from "../styles/styles.module.css";
 
 export interface Props {
+
   className?: string;
   title?: string;
   activeClass?: string;

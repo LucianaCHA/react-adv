@@ -1,5 +1,4 @@
 
-
 .productCard {
     background-color: white;
     border-radius: 15px;
@@ -73,4 +72,29 @@
     position: fixed;   
     right: 4%;
     top: 0px;
+
+  .bg-dark{
+    background-color: #343a40;
+    color: #fff;
+    padding: 14px;
+}
+
+.text-white{
+    color: #fff;
+}
+
+.custom-image {
+    padding: 3px;
+    border-radius: 50%;
+    box-shadow: 8px 0 0 rgba(0,0,0,0.5);
+}
+
+.custom-buttons button, .custom-buttons div{
+    color: aliceblue;
+    border-color: #fff;
+
+    .active{
+        background-color: #fff;
+        color: #343a40;
+    }
 }

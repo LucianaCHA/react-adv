@@ -41,6 +41,7 @@ export const ProductCard = ({
     <ProductTitle title={title} />
     <ProductButtons counter={counter} increaseBy={increaseBy} /> */}
         {children}
+
       </div>
     </Provider>
   );
