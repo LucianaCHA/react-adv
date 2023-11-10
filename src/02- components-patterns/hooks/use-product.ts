@@ -13,7 +13,7 @@ export const useProduct = ({ onChange, product, value = 0 }: useProductArgs) => 
 
     const [ counter, setCounter ] = useState( value );
 
-    const isControlled = useRef( !!onChange )
+    const isControlled = useRef( !!onChange )// con el useRef podemos saber si el onChange esta definido o no
 
     const increaseBy = ( value: number ) => {
 
