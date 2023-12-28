@@ -1,6 +1,6 @@
 import React from "react";
-import {
-  ProductCard,
+import ProductCard, {
+  // ProductCard,
   ProductImage,
   ProductTitle,
   ProductButtons,
@@ -29,23 +29,31 @@ const ShoppingPage = () => {
     <div>
       <h1>Shopping Store</h1>
       <hr />
-        <ProductCard
-          key={product.id}
-          product={product}
-          className="bg-dark text-white"
-          initialValues={{
-            count : 4,
-            maxCount: 10}
-          }
+      <ProductCard
+        key={product.id}
+        product={product}
+        className="bg-dark text-white"
+        initialValues={{
+          count: 4,
+          maxCount: 10
+        }
+        }
 
-        >
-          <ProductImage
-            className="custom-image"
-            style={{ boxShadow: "10px 10px 10px rgba(0,0,0,0.2)" }}
-          />
-          <ProductTitle className="text-bold" />
-          <ProductButtons className="custom-buttons" />
-        </ProductCard>
+      >
+        {
+          ({ reset }) => (
+
+            <>
+              <ProductImage
+                className="custom-image"
+                style={{ boxShadow: "10px 10px 10px rgba(0,0,0,0.2)" }} />
+              <ProductTitle className="text-bold" />
+              <ProductButtons className="custom-buttons" />
+              <button onClick={reset}>Reset</button>
+            </>
+          )
+        }
+      </ProductCard>
     </div>
   );
 };

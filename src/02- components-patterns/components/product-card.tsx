@@ -4,8 +4,8 @@ import { createContext } from "react";
 import {
   IInitialValues,
   IProduct,
+  IProductCardHandlers,
   IProductContextProps,
-  ProductCardProps,
   onChangeArgs,
 } from "../interfaces/interfaces";
 
@@ -15,7 +15,8 @@ const { Provider } = ProductContext; // esta es ,mi fuente de datos
 
 export interface Props {
   product: IProduct;
-  children?: React.ReactElement | React.ReactElement[];
+  // children?: React.ReactElement | React.ReactElement[];
+  children: (args : IProductCardHandlers) => JSX.Element,
   className?: string;
   style?: React.CSSProperties;
   onChange?: (args: onChangeArgs) => void;
@@ -32,10 +33,10 @@ export const ProductCard = ({
   value,
   initialValues
 }: Props) => {
-  const { counter, increaseBy } = useProduct({ onChange, product, value, initialValues });
+  const { counter, increaseBy, maxCount, isMaxCountReached, reset } = useProduct({ onChange, product, value, initialValues });
 
   return (
-    <Provider value={{ product, counter, increaseBy }}>
+    <Provider value={{ product, counter, increaseBy,maxCount }}>
       <div className={`${styles.productCard} ${className}`} style={style}>
         {/* antes venia asi <img className={styles.productImg} src='./coffee-mug.png' alt='Cofee mug' />
     className={styles.ProductCard} */}
@@ -44,7 +45,14 @@ export const ProductCard = ({
         {/* como atomos <ProductImage img={img} title={title} id={id} />
     <ProductTitle title={title} />
     <ProductButtons counter={counter} increaseBy={increaseBy} /> */}
-        {children}
+        {children({
+          counter,
+          maxCount,
+          product,
+          isMaxCountReached,
+          increaseBy,
+          reset
+        })}
 
       </div>
     </Provider>
