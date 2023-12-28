@@ -6,10 +6,11 @@ import { Props as ProductTitleProps } from '../components/product-title';
 export interface ProductCardProps {
   children?: ReactElement | ReactElement[]
   product: IProduct
-  className?: string;
-  style?: React.CSSProperties;
-  onChange?: (args: onChangeArgs) => void;
-  value?: number;
+  className?: string
+  style?: React.CSSProperties
+  onChange?: (args: onChangeArgs) => void
+  value?: number
+  initialValues :IInitialValues
 }
 
 export interface IProduct {
@@ -39,4 +40,9 @@ export interface onChangeArgs {
 
 export interface IProductInCart extends IProduct {
   count: number
+}
+
+export interface IInitialValues {
+  count: number
+  maxCount?: number
 }

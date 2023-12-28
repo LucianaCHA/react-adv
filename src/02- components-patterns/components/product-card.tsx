@@ -2,6 +2,7 @@ import styles from "../styles/styles.module.css";
 import { useProduct } from "../hooks/use-product";
 import { createContext } from "react";
 import {
+  IInitialValues,
   IProduct,
   IProductContextProps,
   ProductCardProps,
@@ -11,6 +12,7 @@ import {
 export const ProductContext = createContext({} as IProductContextProps);
 const { Provider } = ProductContext; // esta es ,mi fuente de datos
 
+
 export interface Props {
   product: IProduct;
   children?: React.ReactElement | React.ReactElement[];
@@ -18,6 +20,7 @@ export interface Props {
   style?: React.CSSProperties;
   onChange?: (args: onChangeArgs) => void;
   value?: number;
+  initialValues: IInitialValues
 }
 
 export const ProductCard = ({
@@ -27,8 +30,9 @@ export const ProductCard = ({
   style,
   onChange,
   value,
+  initialValues
 }: Props) => {
-  const { counter, increaseBy } = useProduct({ onChange, product, value });
+  const { counter, increaseBy } = useProduct({ onChange, product, value, initialValues });
 
   return (
     <Provider value={{ product, counter, increaseBy }}>

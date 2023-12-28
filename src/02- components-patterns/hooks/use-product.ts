@@ -1,25 +1,20 @@
 import { useEffect,useState } from 'react'
-import { onChangeArgs, IProduct } from '../interfaces/interfaces';
+import { onChangeArgs, IProduct, IInitialValues } from '../interfaces/interfaces';
 
 
 interface useProductArgs {
     product: IProduct;
     onChange?: ( args: onChangeArgs ) => void;
     value?: number;
+    initialValues: IInitialValues
 }
 
 
-export const useProduct = ({ onChange, product, value = 0 }: useProductArgs) => {
+export const useProduct = ({ onChange, product, value = 0 , initialValues}: useProductArgs) => {
 
-    const [ counter, setCounter ] = useState( value );
-
-    // const isControlled = useRef( !!onChange )// con el useRef podemos saber si el onChange esta definido o no
+    const [ counter, setCounter ] = useState<number>( initialValues ? initialValues.count : value );
 
     const increaseBy = ( value: number ) => {
-
-        // if( isControlled.current ) {
-        //     return onChange!({ count: value, product });
-        // }
         
         const newValue = Math.max( counter + value, 0 )
         setCounter( newValue );
